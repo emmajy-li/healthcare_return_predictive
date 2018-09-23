@@ -1,5 +1,6 @@
 rm(list = ls()) 
 # remove working space
+
 library(readxl)
 library(leaps)
 library(car)
@@ -13,18 +14,18 @@ setwd("~/Desktop/Final_Project")
 # monthly
 mon_data <- data.frame(read_excel("Group_Project_Data.xlsx"), sheet = 1)
 
-mon_sec_re <- mon_data[, 2]
-mon_rf <- mon_data[, 4]
-mon_sec_exc_re <- mon_sec_re - mon_rf
+mon_sec_re      <- mon_data[, 2]
+mon_rf          <- mon_data[, 4]
+mon_sec_exc_re  <- mon_sec_re - mon_rf
 
 cpi <- mon_data[, 5]
 dpi <- mon_data[, 6]
-id <- mon_data[, 7]
+id  <- mon_data[, 7]
 une <- mon_data[, 8]
 afs <- mon_data[, 9]
 per <- mon_data[, 10]
 pbv <- mon_data[, 11]
-pm <- mon_data[, 12]
+pm  <- mon_data[, 12]
 roe <- mon_data[, 13]
 emp <- mon_data[, 14]
 
@@ -52,19 +53,19 @@ detach(mon_data)
 ann_data <- data.frame(read_excel("Group_Project_Data.xlsx"), sheet = 2)
 
 ann_sec_return <- ann_data[, 2]
-ann_rf <- ann_data[, 3]
+ann_rf         <- ann_data[, 3]
 ann_sec_exc_re <- ann_sec_return - ann_rf
 
 cspi <- ann_data[, 4]
-vc <- ann_data[, 5]
+vc   <- ann_data[, 5]
 dmee <- ann_data[, 6]
-pde <- ann_data[, 7]
-pce <- ann_data[, 8]
-he <- ann_data[, 9]
-ap <- ann_data[, 10]
-ir <- ann_data[, 11]
-ce <- ann_data[, 12]
-dpi <- ann_data[, 13]
+pde  <- ann_data[, 7]
+pce  <- ann_data[, 8]
+he   <- ann_data[, 9]
+ap   <- ann_data[, 10]
+ir   <- ann_data[, 11]
+ce   <- ann_data[, 12]
+dpi  <- ann_data[, 13]
 
 attach(ann_data)
 ann_leaps <- regsubsets(ann_sec_exc_re ~ cspi + vc + dmee + pde + pce 
@@ -130,7 +131,6 @@ summary(com_mon_leaps)
 subsets(com_mon_leaps,  abbrev = 2, legend = FALSE, statistic="cp", las = 1,
         main =
         "Monthly all-subsets regression with exhaustive algorithm (exclude corr)")
-
 detach(mon_data)
 # selection_result: mon: dpi, per, roe.
 # conclusion: same.
@@ -250,18 +250,18 @@ lines(ann_xfit, ann_yfit)
 # monthly
 n <- dim(mon_data)[1]
 
-t_mon_sec_re <- mon_data[2:n, 2]
-t_mon_rf <- mon_data[2:n, 4]
+t_mon_sec_re     <- mon_data[2:n, 2]
+t_mon_rf         <- mon_data[2:n, 4]
 t_mon_sec_exc_re <- t_mon_sec_re - t_mon_rf
 
 t_cpi <- mon_data[1:n-1, 5]
 t_dpi <- mon_data[1:n-1, 6]
-t_id <- mon_data[1:n-1, 7]
+t_id  <- mon_data[1:n-1, 7]
 t_une <- mon_data[1:n-1, 8]
 t_afs <- mon_data[1:n-1, 9]
 t_per <- mon_data[1:n-1, 10]
 t_pbv <- mon_data[1:n-1, 11]
-t_pm <- mon_data[1:n-1, 12]
+t_pm  <- mon_data[1:n-1, 12]
 t_roe <- mon_data[1:n-1, 13]
 t_emp <- mon_data[1:n-1, 14]
 
@@ -286,19 +286,19 @@ ann_data <- data.frame(read_excel("Group_Project_Data.xlsx"), sheet = 2)
 m <- dim(ann_data)[1]
 
 t_ann_sec_return <- ann_data[2:m, 2]
-t_ann_rf <- ann_data[2:m, 3]
+t_ann_rf         <- ann_data[2:m, 3]
 t_ann_sec_exc_re <- t_ann_sec_return - t_ann_rf
 
 t_cspi <- ann_data[1:m-1, 4]
-t_vc <- ann_data[1:m-1, 5]
+t_vc   <- ann_data[1:m-1, 5]
 t_dmee <- ann_data[1:m-1, 6]
-t_pde <- ann_data[1:m-1, 7]
-t_pce <- ann_data[1:m-1, 8]
-t_he <- ann_data[1:m-1, 9]
-t_ap <- ann_data[1:m-1, 10]
-t_ir <- ann_data[1:m-1, 11]
-t_ce <- ann_data[1:m-1, 12]
-t_dpi <- ann_data[1:m-1, 13]
+t_pde  <- ann_data[1:m-1, 7]
+t_pce  <- ann_data[1:m-1, 8]
+t_he   <- ann_data[1:m-1, 9]
+t_ap   <- ann_data[1:m-1, 10]
+t_ir   <- ann_data[1:m-1, 11]
+t_ce   <- ann_data[1:m-1, 12]
+t_dpi  <- ann_data[1:m-1, 13]
 
 attach(ann_data)
 t_ann_leaps <- regsubsets(t_ann_sec_exc_re ~ t_cspi + t_vc + t_dmee + t_pde 
